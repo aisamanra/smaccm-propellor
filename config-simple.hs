@@ -24,9 +24,9 @@ buildHost =
   in host "smaccm-build-comrade.dev.galois.com"
      & ipv4 "192.168.52.236"
      & os (System (Debian (Stable "jessie")) "amd64")
+     & Cmd.cmdProperty "echo" ["$PATH"]
      & Apt.stdSourcesList' (Stable "jessie") [const ["ppa:terry.guo/gcc-arm-embedded"]]
      & Apt.update
-     & Cmd.cmdProperty "echo" ["$PATH"]
      & Apt.installed ["ghc","git"]
      & Apt.installed ["gcc-arm-none-eabi"]
      & Git.cloned usr "https://github.com/galoisinc/ivory" ivoryRepo Nothing
