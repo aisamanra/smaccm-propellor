@@ -6,7 +6,7 @@ import qualified Propellor.Property.Git     as Git
 
 main :: IO ()
 main = do
-  defaultMain []
+  defaultMain [buildHost']
 
 buildHost' :: Host
 buildHost' = host "smaccm-build-comrade.dev.galois.com"
