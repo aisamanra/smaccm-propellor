@@ -11,6 +11,7 @@ main = do
 buildHost' :: Host
 buildHost' = host "smaccm-build-comrade.dev.galois.com"
              & ipv4 "192.168.52.236"
+             & os (System (Debian Unstable) "amd64")
              & Apt.update
 
 cabalInstall :: String -> Property NoInfo
