@@ -6,7 +6,12 @@ import qualified Propellor.Property.Git     as Git
 
 main :: IO ()
 main = do
-  defaultMain [ buildHost ]
+  defaultMain [ buildHost' ]
+
+buildHost' :: Host
+buildHost' = host "smaccm-build-comrade.dev.galois.com"
+             & ipv4 "192.168.52.236"
+             & Apt.update
 
 cabalInstall :: String -> Property NoInfo
 cabalInstall pkgs = Cmd.cmdProperty "cabal" ["install", pkgs]
