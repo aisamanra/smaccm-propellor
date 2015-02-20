@@ -26,7 +26,7 @@ buildHost =
      & os (System (Debian (Stable "jessie")) "amd64")
      & Apt.stdSourcesList
      & Apt.update
-     & Apt.installed ["ghc"]
+     & Apt.installed ["ghc","git"]
      & Apt.setSourcesList ["ppa:terry.guo/gcc-arm-embedded"]
      & Apt.installed ["gcc-arm-none-eabi"]
      & Git.cloned usr "https://github.com/galoisinc/ivory" ivoryRepo Nothing
