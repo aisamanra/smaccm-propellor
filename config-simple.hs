@@ -28,9 +28,8 @@ buildHost =
       bspRepo   = dir <> "/ivory-tower-stm32"
   in host "smaccm-build-comrade.dev.galois.com"
      & ipv4 "192.168.52.236"
-     & os (System (Debian (Stable "jessie")) "amd64")
-     & Cmd.cmdProperty "echo" ["$PATH"]
-     & Apt.stdSourcesList' (Stable "jessie") [const ["ppa:terry.guo/gcc-arm-embedded"]]
+     & os (System (Debian (Stable "wheezy")) "amd64")
+     & Apt.stdSourcesList' (Stable "wheezy") [const ["ppa:terry.guo/gcc-arm-embedded"]]
      & Apt.update
      & Apt.installed ["ghc","git"]
      & Apt.installed ["gcc-arm-none-eabi"]
