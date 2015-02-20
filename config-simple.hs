@@ -6,7 +6,6 @@ import qualified Propellor.Property.Git     as Git
 
 main :: IO ()
 main = do
-  print buildHost
   defaultMain [host "lemuria", buildHost]
 
 cabalInstall :: String -> Property NoInfo
@@ -22,7 +21,8 @@ buildHost =
       ivoryRepo = dir <> "/ivory"
       towerRepo = dir <> "/tower"
       bspRepo   = dir <> "/ivory-tower-stm32"
-  in host "sbc"
+  in host "smaccm-build-comrade.dev.galois.com"
+     & ipv4 "192.168.52.236"
      & os (System (Debian (Stable "jessie")) "amd64")
      & Apt.stdSourcesList
      & Apt.update
