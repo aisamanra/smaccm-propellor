@@ -28,8 +28,7 @@ buildHost =
       clone r = Git.cloned usr r dir Nothing
   in host "smaccm-build-comrade.dev.galois.com"
      & ipv4 "192.168.52.224"
---     & os (System (Ubuntu "saucy") "amd64")
-     & Apt.stdSourcesList
+     & os (System (Ubuntu "saucy") "amd64")
      & Apt.installed ["software-properties-common"]
      & Cmd.cmdProperty "add-apt-repository"
          ["add-apt-repository -y ppa:terry.guo/gcc-arm-embedded"]
