@@ -27,7 +27,7 @@ buildHost =
      & os (System (Debian (Stable "jessie")) "amd64")
      & Apt.stdSourcesList
      & Apt.installed ["software-properties-common"]
-     & Cmd.cmdProperty "add-apt-repository" ["ppa:terry.guo/gcc-arm-embedded"]
+     & Cmd.cmdProperty "add-apt-repository" ["deb http://ppa.launchpad.net/terry.guo/gcc-arm-embedded/ubuntu utopic main"]
      & Apt.update
      & Apt.installed ["gcc-arm-none-eabi","zlib1g-dev"]
      & File.dirExists dir
