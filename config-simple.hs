@@ -26,7 +26,7 @@ buildHost =
      & ipv4 "192.168.52.236"
      & os (System (Debian (Stable "jessie")) "amd64")
      & Apt.stdSourcesList
-     & Apt.installed ["python-software-properties"]
+     & Apt.installed ["software-properties-common"]
      & Cmd.cmdProperty "add-apt-repository" ["ppa:terry.guo/gcc-arm-embedded"]
      & Apt.update
      & Apt.installed ["gcc-arm-none-eabi","zlib1g-dev"]
