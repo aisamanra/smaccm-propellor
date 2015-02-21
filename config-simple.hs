@@ -28,7 +28,7 @@ buildHost =
      & Apt.stdSourcesList
      & Cmd.cmdProperty "add-apt-repository" ["ppa:terry.guo/gcc-arm-embedded"]
      & Apt.update
-     & Apt.installed ["gcc-arm-none-eabi"]
+     & Apt.installed ["gcc-arm-none-eabi","zlib1g-dev"]
      & File.dirExists dir
      & Git.cloned usr "https://github.com/galoisinc/ivory" dir Nothing
      & Git.cloned usr "https://github.com/galoisinc/tower" dir Nothing
