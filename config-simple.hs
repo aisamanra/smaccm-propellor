@@ -17,7 +17,7 @@ allOf xs = simpleProperty "Finished list" (return NoChange) xs
 
 buildHost :: Host
 buildHost =
-  let usr = "build"
+  let usr = "root"
       dir = "/build"
       ivoryRepo = dir <> "/ivory"
       towerRepo = dir <> "/tower"
@@ -30,9 +30,9 @@ buildHost =
      & Apt.update
      & Apt.installed ["gcc-arm-none-eabi"]
      & File.dirExists dir
-     & Git.cloned usr "https://github.com/galoisinc/ivory" ivoryRepo Nothing
-     & Git.cloned usr "https://github.com/galoisinc/tower" towerRepo Nothing
-     & Git.cloned usr "https://github.com/galoisinc/ivory-tower-stm32" bspRepo Nothing
+     & Git.cloned usr "https://github.com/galoisinc/ivory" dir Nothing
+     & Git.cloned usr "https://github.com/galoisinc/tower" dir Nothing
+     & Git.cloned usr "https://github.com/galoisinc/ivory-tower-stm32" dir Nothing
      & Cmd.cmdProperty "cabal" ["update"]
      & cabalInstall "cabal-install"
      & cabalInstall "cabal-install"
