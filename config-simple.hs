@@ -29,11 +29,11 @@ buildHost =
   in host "smaccm-build-comrade.dev.galois.com"
      & ipv4 "192.168.52.235"
      & os (System (Ubuntu "saucy") "amd64")
-     & Apt.installed ["software-properties-common"]
+     & Apt.installed ["software-properties-common","zlib1g-dev"]
      & Cmd.cmdProperty "add-apt-repository"
          ["add-apt-repository -y ppa:terry.guo/gcc-arm-embedded"]
      & Apt.update
-     & Apt.installed ["gcc-arm-none-eabi","zlib1g-dev"]
+     & Apt.installed ["gcc-arm-none-eabi"]
      & File.dirExists dir
      & clone "https://github.com/galoisinc/ivory"
      & clone "https://github.com/galoisinc/tower"
