@@ -2,6 +2,7 @@ import Propellor
 import Propellor.CmdLine
 import qualified Propellor.Property.Apt     as Apt
 import qualified Propellor.Property.Cmd     as Cmd
+import qualified Propellor.Property.File    as File
 import qualified Propellor.Property.Git     as Git
 
 main :: IO ()
@@ -28,6 +29,7 @@ buildHost =
      & Cmd.cmdProperty "add-apt-repository" ["ppa:terry.guo/gcc-arm-embedded"]
      & Apt.update
      & Apt.installed ["gcc-arm-none-eabi"]
+     & File.dirExists dir
      & Git.cloned usr "https://github.com/galoisinc/ivory" ivoryRepo Nothing
      & Git.cloned usr "https://github.com/galoisinc/tower" towerRepo Nothing
      & Git.cloned usr "https://github.com/galoisinc/ivory-tower-stm32" bspRepo Nothing
