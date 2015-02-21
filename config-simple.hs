@@ -26,8 +26,8 @@ buildHost =
       towerRepo = dir <> "/tower"
       bspRepo   = dir <> "/ivory-tower-stm32"
       clone r = Git.cloned usr r dir Nothing
-  in host "smaccm-build-comrade.dev.galois.com"
-     & ipv4 "192.168.52.235"
+  in host "ec2-52-10-93-116.us-west-2.compute.amazonaws.com"
+     & alias "smaccm-build-comrade"
      & os (System (Ubuntu "saucy") "amd64")
      & Apt.installed ["software-properties-common","zlib1g-dev"]
      & Cmd.cmdProperty "add-apt-repository"
