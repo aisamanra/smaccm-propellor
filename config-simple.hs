@@ -24,9 +24,9 @@ buildHost =
   in host "smaccm-build-comrade.dev.galois.com"
      & ipv4 "192.168.52.236"
      & os (System (Debian (Stable "wheezy")) "amd64")
-     & Apt.stdSourcesList' (Stable "wheezy") [const ["ppa:terry.guo/gcc-arm-embedded"]]
+     & Apt.stdSourcesList
+     & Cmd.cmdProperty "add-apt-repository" ["ppa:terry.guo/gcc-arm-embedded"]
      & Apt.update
-     & Apt.installed ["ghc","git"]
      & Apt.installed ["gcc-arm-none-eabi"]
      & Git.cloned usr "https://github.com/galoisinc/ivory" ivoryRepo Nothing
      & Git.cloned usr "https://github.com/galoisinc/tower" towerRepo Nothing
