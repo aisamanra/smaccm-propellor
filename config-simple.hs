@@ -33,6 +33,8 @@ buildHost =
      & Git.cloned usr "https://github.com/galoisinc/ivory" ivoryRepo Nothing
      & Git.cloned usr "https://github.com/galoisinc/tower" towerRepo Nothing
      & Git.cloned usr "https://github.com/galoisinc/ivory-tower-stm32" bspRepo Nothing
+     & Cmd.cmdProperty "cabal" ["update"]
+     & cabalInstall "cabal-install"
      & cabalInstall "cabal-install"
      & cabalInstall "alex"
      & cabalInstall "happy"
