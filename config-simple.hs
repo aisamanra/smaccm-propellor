@@ -31,7 +31,7 @@ buildHost =
      & os (System (Ubuntu "saucy") "amd64")
      & Apt.installed ["software-properties-common","zlib1g-dev"]
      & Cmd.cmdProperty "add-apt-repository"
-         ["add-apt-repository -y ppa:terry.guo/gcc-arm-embedded"]
+         ["-y", "ppa:terry.guo/gcc-arm-embedded"]
      & Apt.update
      & Apt.installed ["gcc-arm-none-eabi"]
      & File.dirExists dir
