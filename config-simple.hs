@@ -6,13 +6,7 @@ import qualified Propellor.Property.Git     as Git
 
 main :: IO ()
 main = do
-  defaultMain [buildHost']
-
-buildHost' :: Host
-buildHost' = host "smaccm-build-comrade.dev.galois.com"
-             & ipv4 "192.168.52.236"
-             & os (System (Debian Unstable) "amd64")
-             & Apt.update
+  defaultMain [buildHost]
 
 cabalInstall :: String -> Property NoInfo
 cabalInstall pkgs = Cmd.cmdProperty "cabal" ["install", pkgs]
