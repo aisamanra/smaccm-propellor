@@ -9,8 +9,11 @@ main :: IO ()
 main = do
   defaultMain [buildHost]
 
-cabalInstall :: String -> Property NoInfo
-cabalInstall pkgs = Cmd.cmdProperty "cabal" ["install", pkgs]
+cabalInstall :: [String] -> Property NoInfo
+cabalInstall pkgs = Cmd.cmdProperty "cabal" ("install":pkgs)
+
+cabalUpdate :: Property NoInfo
+cabalUpdate = Cmd.cmdProperty "cabal" ["update"]
 
 allOf :: [Property NoInfo] -> Property NoInfo
 allOf xs = simpleProperty "Finished list" (return NoChange) xs
@@ -22,23 +25,22 @@ buildHost =
       ivoryRepo = dir <> "/ivory"
       towerRepo = dir <> "/tower"
       bspRepo   = dir <> "/ivory-tower-stm32"
+      clone r = Git.cloned usr r dir Nothing
   in host "smaccm-build-comrade.dev.galois.com"
      & ipv4 "192.168.52.236"
-     & os (System (Debian (Stable "jessie")) "amd64")
+     & os (System (Ubuntu "saucy") "amd64")
      & Apt.stdSourcesList
      & Apt.installed ["software-properties-common"]
-     & Cmd.cmdProperty "add-apt-repository" ["deb http://ppa.launchpad.net/terry.guo/gcc-arm-embedded/ubuntu utopic main"]
+     & Cmd.cmdProperty "add-apt-repository"
+         ["add-apt-repository -y ppa:terry.guo/gcc-arm-embedded"]
      & Apt.update
      & Apt.installed ["gcc-arm-none-eabi","zlib1g-dev"]
      & File.dirExists dir
-     & Git.cloned usr "https://github.com/galoisinc/ivory" dir Nothing
-     & Git.cloned usr "https://github.com/galoisinc/tower" dir Nothing
-     & Git.cloned usr "https://github.com/galoisinc/ivory-tower-stm32" dir Nothing
-     & Cmd.cmdProperty "cabal" ["update"]
-     & cabalInstall "cabal-install"
-     & cabalInstall "cabal-install"
-     & cabalInstall "alex"
-     & cabalInstall "happy"
+     & clone "https://github.com/galoisinc/ivory"
+     & clone "https://github.com/galoisinc/tower"
+     & clone "https://github.com/galoisinc/ivory-tower-stm32"
+     & cabalUpdate
+     & cabalInstall ["cabal-install", "alex", "happy"]
      & allOf [ Cmd.cmdProperty' "make" [target]
                [ ("IVORY_REPO", ivoryRepo)
                , ("TOWER_REPO", towerRepo)
